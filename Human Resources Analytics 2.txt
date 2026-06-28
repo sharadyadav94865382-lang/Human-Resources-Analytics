@@ -1,0 +1,15 @@
+// --- 1. CORE HEADCOUNT LOGIC ---
+Total_Workforce = COUNT(final_hr_dataset[Employee_ID])
+Active_Workforce = CALCULATE([Total_Workforce], final_hr_dataset[Status] = "Active")
+
+// --- 2. TURNOVER & ATTRITION ANALYSIS ---
+Total_Exits = CALCULATE([Total_Workforce], final_hr_dataset[Status] = "Terminated")
+Turnover_Rate_Percent = DIVIDE([Total_Exits], [Total_Workforce], 0)
+
+// --- 3. PERFORMANCE & SATISFACTION INSIGHTS ---
+Avg_Satisfaction = AVERAGE(final_hr_dataset[Satisfaction_Score])
+High_Performers_Ratio = DIVIDE(CALCULATE([Total_Workforce], final_hr_dataset[Performance_Rating] IN {"Meets Expectations", "Exceeds Expectations"}), [Total_Workforce], 0)
+
+// --- 4. PREDICTIVE ANALYTICS FOR HIRING FORECAST ---
+Avg_Monthly_Hires = AVERAGEX(VALUES(final_hr_dataset[Hire_Month_Name]), [Total_Workforce])
+Predictive_Hiring_Need = [Avg_Monthly_Hires] * (1 + [Turnover_Rate_Percent])

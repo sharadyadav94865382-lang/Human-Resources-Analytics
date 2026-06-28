@@ -1,0 +1,65 @@
+======================================================================================
+POWER BI INTERACTIVE DASHBOARD STRUCTURE & VISUAL CONFIGURATION CODE
+======================================================================================
+
+[TAB 1: WORKFORCE OVERVIEW & RECRUITMENT]
+--------------------------------------------------------------------------------------
+1. TOP KPI CARDS (Ribbon Panel)
+   - Visual Type: Card (New) / Multi-row Card
+   - Data Fields: 
+     * Field 1: [Active_Workforce] (Format: Display unit -> None)
+     * Field 2: [Turnover_Rate_Percent] (Format: Percentage -> 2 Decimal)
+     * Field 3: [Avg_Satisfaction] (Format: Decimal -> 1 Decimal)
+
+2. DEPARTMENT HEADCOUNT DISTRIBUTION
+   - Visual Type: Donut Chart / Pie Chart
+   - Legend: final_hr_dataset[Department]
+   - Values: [Active_Workforce]
+   - Properties: Detail labels -> "Category, percent of total"
+
+3. RECRUITMENT TREND OVER TIME
+   - Visual Type: Stacked Column Chart
+   - X-Axis: final_hr_dataset[Hire_Year] aur [Hire_Month_Name]
+   - Y-Axis: [Total_Workforce]
+   - Legend: final_hr_dataset[Status]
+
+
+[TAB 2: PERFORMANCE & SATISFACTION INSIGHTS]
+--------------------------------------------------------------------------------------
+1. SATISFACTION VS SALARY CORRELATION
+   - Visual Type: Scatter Chart
+   - X-Axis: [Avg_Satisfaction]
+   - Y-Axis: final_hr_dataset[Monthly_Salary] (Set to Average)
+   - Legend/Play Axis: final_hr_dataset[Department]
+
+2. PERFORMANCE RATING BREAKDOWN
+   - Visual Type: Clustered Bar Chart
+   - Y-Axis: final_hr_dataset[Performance_Rating]
+   - X-Axis: [Total_Workforce]
+   - Data Labels: On
+
+
+[TAB 3: PREDICTIVE ANALYTICS & HIRING FORECAST]
+--------------------------------------------------------------------------------------
+1. FUTURE HIRING REQUIREMENTS CARD
+   - Visual Type: Card
+   - Data Field: [Predictive_Hiring_Need]
+   - Subtitle/Label: "Estimated Hires Required Next Month"
+
+2. TIME SERIES FORECASTING MODEL (CRITICAL STEP)
+   - Visual Type: Line Chart
+   - X-Axis: final_hr_dataset[Hire_Date] (Right-click and change from Hierarchy to 'Hire_Date')
+   - Y-Axis: [Total_Workforce]
+   
+   * HOW TO ENABLE MACHINE LEARNING FORECAST IN POWER BI:
+     1. Click on the Line Chart visual.
+     2. Go to the 'Format Visual' pane on the right.
+     3. Click on the 'Analytics' tab (Magnifying Glass Icon).
+     4. Scroll down to 'Forecast' and toggle it to 'ON'.
+     5. Set Settings:
+        - Forecast Length: 10 (Points or Months depending on axis)
+        - Confidence Interval: 95%
+        - Seasonality: Auto
+     6. Click 'Apply'. 
+        --> Power BI will automatically inject a shaded predictive band showing future hiring needs.
+======================================================================================
